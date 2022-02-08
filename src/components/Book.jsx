@@ -1,4 +1,5 @@
 import { Col } from 'react-bootstrap'
+import './Book.css'
 
 const Book = ({ bookData }) => {
   return (<Col xs={12} md={3} className="m-1 p-1">

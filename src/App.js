@@ -2,14 +2,14 @@ import './App.css'
 import MyNavbar from './components/MyNavbar'
 import MyFooter from './components/MyFooter'
 import Welcome from './components/Welcome'
-import LatestRelease from './components/LatestRelease'
+import BookWrapper from './components/BookWrapper'
 
 function App() {
   return (
     <div className="App bg-dark">
       <MyNavbar />
       <Welcome />
-      <LatestRelease />
+      <BookWrapper />
       <MyFooter />
     </div>
   )
