@@ -9,6 +9,7 @@ function App() {
     <div className="App bg-dark">
       <MyNavbar />
       <Welcome />
+
       <BookWrapper />
       <MyFooter />
     </div>
