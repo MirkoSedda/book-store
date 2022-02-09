@@ -12,6 +12,10 @@ export default class Book extends Component {
 
   handleClick = () => { this.setState({ selected: !this.state.selected }) }
 
+   handleColorChange = (e) => {
+     this.state.selected === false ? e.currentTarget.style.backgroundColor = 'yellow' :       e.currentTarget.style.backgroundColor = 'black'
+
+     }
 
   render() {
     return (
@@ -19,6 +23,7 @@ export default class Book extends Component {
         xs={12}
         md={3}
         className="m-1 p-1 card-container"
+        onClick={this.handleColorChange}
       >
         <div className="card bg-dark" onClick={this.handleClick}>
 
