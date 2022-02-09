@@ -12,10 +12,10 @@ export default class Book extends Component {
 
   handleClick = () => { this.setState({ selected: !this.state.selected }) }
 
-   handleColorChange = (e) => {
-     this.state.selected === false ? e.currentTarget.style.backgroundColor = 'yellow' :       e.currentTarget.style.backgroundColor = 'black'
+  handleColorChange = (e) => {
+    this.state.selected === false ? e.currentTarget.style.backgroundColor = 'yellow' : e.currentTarget.style.backgroundColor = 'black'
 
-     }
+  }
 
   render() {
     return (
