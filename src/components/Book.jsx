@@ -5,16 +5,18 @@ import './Book.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default class Book extends Component {
-
   state = {
     selected: false,
   }
 
-  handleClick = () => { this.setState({ selected: !this.state.selected }) }
+  handleClick = () => {
+    this.setState({ selected: !this.state.selected })
+  }
 
-  handleColorChange = (e) => {
-    this.state.selected === false ? e.currentTarget.style.backgroundColor = 'yellow' : e.currentTarget.style.backgroundColor = '#212529'
-
+  handleColorChange = e => {
+    this.state.selected === false
+      ? (e.currentTarget.style.backgroundColor = 'yellow')
+      : (e.currentTarget.style.backgroundColor = '#212529')
   }
 
   render() {
@@ -26,7 +28,6 @@ export default class Book extends Component {
         onClick={this.handleColorChange}
       >
         <div className="card bg-dark" onClick={this.handleClick}>
-
           <MyBadge branding="Delete Book" color="dark" className="badge" />
           <img
             className="d-block img-fluid img"

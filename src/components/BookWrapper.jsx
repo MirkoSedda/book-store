@@ -1,6 +1,5 @@
 import { Component } from 'react'
 import { InputGroup, FormControl, Container, Row } from 'react-bootstrap'
-//import MyInput from './MyInput'
 
 import Book from './Book'
 import books from '../data/horror.json'
@@ -8,7 +7,6 @@ import books from '../data/horror.json'
 export default class BookWrapper extends Component {
   state = {
     bookTitle: '',
-
   }
 
 
