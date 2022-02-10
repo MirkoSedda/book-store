@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Col } from 'react-bootstrap'
 import MyBadge from './MyBadge'
+import CommentArea from './CommentArea'
+
 import './Book.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -11,6 +13,8 @@ export default class Book extends Component {
 
   handleClick = () => {
     this.setState({ selected: !this.state.selected })
+
+
   }
 
   handleColorChange = e => {
@@ -35,6 +39,9 @@ export default class Book extends Component {
             alt={this.props.bookData.title}
           />
           <h4 className="bg-dark text-light">{this.props.bookData.title}</h4>
+          {
+            this.state.selected === true && <CommentArea bookId={this.props.bookData.asin} />
+          }
         </div>
       </Col>
     )

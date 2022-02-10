@@ -36,6 +36,7 @@ export default class BookWrapper extends Component {
             .map(book => {
               return <Book bookData={book} key={book.asin} />
             })}
+
         </Row>
       </Container>
     )
