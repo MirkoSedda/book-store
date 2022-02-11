@@ -19,28 +19,32 @@ export default class Book extends Component {
 
   handleColorChange = e => {
     this.state.selected === false
-      ? (e.currentTarget.style.backgroundColor = 'yellow')
+      ? (e.currentTarget.style.backgroundColor = 'red')
       : (e.currentTarget.style.backgroundColor = '#212529')
   }
 
   render() {
     return (
+
       <Col
         xs={12}
         md={3}
         className="m-1 p-1 card-container"
         onClick={this.handleColorChange}
       >
-        <div className="card bg-dark" onClick={this.handleClick}>
+        <div className="card bg-dark"
+          onClick={this.handleClick}
+        //style={{ border: this.state.selected ? '3px solid red' : 'none' }}
+        >
           <MyBadge branding="Delete Book" color="dark" className="badge" />
           <img
             className="d-block img-fluid img"
-            src={this.props.bookData.img}
-            alt={this.props.bookData.title}
+            src={this.props.book.img}
+            alt={this.props.book.title}
           />
-          <h4 className="bg-dark text-light">{this.props.bookData.title}</h4>
+          <h4 className="bg-dark text-light">{this.props.book.title}</h4>
           {
-            this.state.selected === true && <CommentArea bookId={this.props.bookData.asin} />
+            this.state.selected === true && <CommentArea book={this.props.book} />
           }
         </div>
       </Col>

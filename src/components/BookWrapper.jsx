@@ -34,7 +34,7 @@ export default class BookWrapper extends Component {
                 .includes(this.state.bookTitle.toLowerCase())
             )
             .map(book => {
-              return <Book bookData={book} key={book.asin} />
+              return <Book book={book} key={book.asin} />
             })}
 
         </Row>

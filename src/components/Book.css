@@ -1,8 +1,8 @@
-.badge{
-  position:absolute;
-  top:0;
-  left:0;
-  z-index:100;
+.badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .img {
@@ -11,14 +11,14 @@
   object-fit: cover;
 }
 
-.card{
+.card {
   border-color: gray;
 }
 
-.card-container{
-   transition: transform .2s;
+.card-container {
+  transition: transform 0.2s;
 }
 
 .card-container:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }

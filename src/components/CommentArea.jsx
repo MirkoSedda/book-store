@@ -1,49 +1,50 @@
-import React, { Component } from 'react'
-import AddComment from './AddComment'
+import { Component } from 'react'
 import CommentLists from './CommentLists'
+import AddComment from './AddComment'
+import Loading from './Loading'
+import Error from './Error'
 
-
-export default class CommentArea extends Component {
+class CommentArea extends Component {
 
     state = {
-        comments: [],
+        comments: [], // comments will go here
         isLoading: true,
+        isError: false
     }
 
-    componentDidMount = async (props) => {
-
+    componentDidMount = async () => {
         try {
-            let resp = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`, {
+            let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/' + this.props.book.asin, {
                 headers: {
-                    'content-type': 'application/json',
-                    authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDM4MDAxNDIsImV4cCI6MTY0NTAwOTc0Mn0.P9w7OXz4zve7wfC83LXdJteK6TsglIMohh94l3bqIiA',
-                },
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ1MjYwMjQsImV4cCI6MTY0NTczNTYyNH0.hvWQhj7Uh3t_BvaXMYybgCi5Z3gTDFeY4c4yAZIQab8'
+                }
             })
-            if (resp.ok) {
-                let comments = await resp.json()
-                console.log(comments)
-                this.setState({
-                    comments: comments,
-                    isLoading: false,
-                })
+
+            console.log(this.props.book.asin)
+            console.log(response)
+            if (response.ok) {
+                let comments = await response.json()
+                this.setState({ comments: comments, isLoading: false, isError: false })
+            } else {
+                console.log('error')
+                this.setState({ isLoading: false, isError: true })
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error)
+            this.setState({ isLoading: false, isError: true })
         }
     }
 
     render() {
         return (
-            <div className="bg-dark text-light d-flex flex-column">
+            <div>
+                {this.state.isLoading && <Loading />}
+                {this.state.isError && <Error />}
+                <AddComment asin={this.props.book.asin} />
                 <CommentLists comments={this.state.comments} />
-                <AddComment />
             </div>
         )
     }
 }
 
-
-
-
+export default CommentArea
