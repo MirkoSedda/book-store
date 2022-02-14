@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import CommentLists from './CommentLists'
+import CommentList from './CommentList'
 import AddComment from './AddComment'
 import Loading from './Loading'
 import Error from './Error'
@@ -14,13 +14,11 @@ class CommentArea extends Component {
 
     componentDidMount = async () => {
         try {
-            let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/' + this.props.book.asin, {
+            let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/' + this.props.asin, {
                 headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ1MjYwMjQsImV4cCI6MTY0NTczNTYyNH0.hvWQhj7Uh3t_BvaXMYybgCi5Z3gTDFeY4c4yAZIQab8'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTI3NzVkYjYzOTI4ZTAwMTU5YzViZGYiLCJpYXQiOjE2Mjk5NzYwMjcsImV4cCI6MTYzMTE4NTYyN30.AG3UEgfx5scipcUtcGoKTnTUAQFRUGU4wsMg7FzMfBw'
                 }
             })
-
-            console.log(this.props.book.asin)
             console.log(response)
             if (response.ok) {
                 let comments = await response.json()
@@ -40,8 +38,8 @@ class CommentArea extends Component {
             <div>
                 {this.state.isLoading && <Loading />}
                 {this.state.isError && <Error />}
-                <AddComment asin={this.props.book.asin} />
-                <CommentLists comments={this.state.comments} />
+                <AddComment asin={this.props.asin} />
+                <CommentList commentsToShow={this.state.comments} />
             </div>
         )
     }

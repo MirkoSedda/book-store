@@ -1,53 +1,31 @@
-import React, { Component } from 'react'
-import { Col } from 'react-bootstrap'
-import MyBadge from './MyBadge'
+import React from 'react'
+import { Card } from 'react-bootstrap'
 import CommentArea from './CommentArea'
 
-import './Book.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+class Book extends React.Component {
 
-export default class Book extends Component {
   state = {
-    selected: false,
-  }
-
-  handleClick = () => {
-    this.setState({ selected: !this.state.selected })
-
-
-  }
-
-  handleColorChange = e => {
-    this.state.selected === false
-      ? (e.currentTarget.style.backgroundColor = 'red')
-      : (e.currentTarget.style.backgroundColor = '#212529')
+    selected: false
   }
 
   render() {
     return (
-
-      <Col
-        xs={12}
-        md={3}
-        className="m-1 p-1 card-container"
-        onClick={this.handleColorChange}
-      >
-        <div className="card bg-dark"
-          onClick={this.handleClick}
-        //style={{ border: this.state.selected ? '3px solid red' : 'none' }}
+      <>
+        <Card
+          onClick={() => this.setState({ selected: !this.state.selected })}
+          style={{ border: this.state.selected ? '3px solid red' : 'none' }}
         >
-          <MyBadge branding="Delete Book" color="dark" className="badge" />
-          <img
-            className="d-block img-fluid img"
-            src={this.props.book.img}
-            alt={this.props.book.title}
-          />
-          <h4 className="bg-dark text-light">{this.props.book.title}</h4>
-          {
-            this.state.selected === true && <CommentArea book={this.props.book} />
-          }
-        </div>
-      </Col>
+          <Card.Img variant="top" src={this.props.book.img} />
+          <Card.Body>
+            <Card.Title style={{ color: 'black' }}>{this.props.book.title}</Card.Title>
+          </Card.Body>
+        </Card>
+        {
+          this.state.selected && <CommentArea asin={this.props.book.asin} />
+        }
+      </>
     )
   }
 }
+
+export default Book

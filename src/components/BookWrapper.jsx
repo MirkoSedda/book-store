@@ -1,44 +1,42 @@
-import { Component } from 'react'
-import { InputGroup, FormControl, Container, Row } from 'react-bootstrap'
-
+import React from 'react'
 import Book from './Book'
-import books from '../data/horror.json'
+import { Col, Container, Form, Row } from 'react-bootstrap'
 
-export default class BookWrapper extends Component {
+class BookWrapper extends React.Component {
+
   state = {
-    bookTitle: '',
-  }
-
-
-  handleChange = value => {
-    this.setState({ bookTitle: value })
+    searchQuery: ''
   }
 
   render() {
     return (
       <Container>
-        <>
-          <InputGroup size="sm" className="mb-3">
-            <FormControl
-              onChange={e => this.handleChange(e.target.value)}
-              aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </InputGroup>
-        </>
         <Row>
-          {books
-            .filter(book =>
-              book.title
-                .toLowerCase()
-                .includes(this.state.bookTitle.toLowerCase())
-            )
-            .map(book => {
-              return <Book book={book} key={book.asin} />
-            })}
-
+          <Col>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Search</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Search here"
+                value={this.state.searchQuery}
+                onChange={e => this.setState({ searchQuery: e.target.value })}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          {
+            this.props.books.filter(b => b.title.toLowerCase().includes(this.state.searchQuery)).map(b => (
+              <Col xs={3} key={b.asin} >
+                <Book book={b} />
+              </Col>
+            ))
+          }
         </Row>
       </Container>
     )
   }
+
 }
+
+export default BookWrapper
