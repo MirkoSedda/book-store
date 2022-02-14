@@ -1,11 +1,17 @@
-import React from 'react'
+import { Component } from 'react'
 import Book from './Book'
+import CommentArea from './CommentArea'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 
-class BookWrapper extends React.Component {
+class BookWrapper extends Component {
 
   state = {
-    searchQuery: ''
+    searchQuery: '',
+    bookAsin: undefined,
+  }
+
+  changeState = (value) => {
+    this.setState({ ...this.state, bookAsin: value })
   }
 
   render() {
@@ -24,14 +30,19 @@ class BookWrapper extends React.Component {
             </Form.Group>
           </Col>
         </Row>
-        <Row>
-          {
-            this.props.books.filter(b => b.title.toLowerCase().includes(this.state.searchQuery)).map(b => (
-              <Col xs={3} key={b.asin} >
-                <Book book={b} />
-              </Col>
-            ))
-          }
+        <Row >
+          <Col xs={9}>
+            {
+              this.props.books.filter(book => book.title.toLowerCase().includes(this.state.searchQuery)).map(book => (
+                <Col xs={12} key={book.asin} >
+                  <Book book={book} changeState={this.changeState} />
+                </Col>
+              ))
+            }
+          </Col>
+          <Col xs={3}>
+            <CommentArea asin={this.state.bookAsin} />
+          </Col>
         </Row>
       </Container>
     )
