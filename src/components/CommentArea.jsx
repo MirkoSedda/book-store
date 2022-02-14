@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import CommentList from './CommentList'
+import CommentWrapper from './CommentWrapper'
 import AddComment from './AddComment'
 import Loading from './Loading'
 import Error from './Error'
@@ -7,7 +7,7 @@ import Error from './Error'
 class CommentArea extends Component {
 
     state = {
-        comments: [], // comments will go here
+        comments: [],
         isLoading: true,
         isError: false
     }
@@ -16,7 +16,7 @@ class CommentArea extends Component {
         try {
             let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/' + this.props.asin, {
                 headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTI3NzVkYjYzOTI4ZTAwMTU5YzViZGYiLCJpYXQiOjE2Mjk5NzYwMjcsImV4cCI6MTYzMTE4NTYyN30.AG3UEgfx5scipcUtcGoKTnTUAQFRUGU4wsMg7FzMfBw'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ4NDQ3NjcsImV4cCI6MTY0NjA1NDM2N30.CQYFhS63KiJkhKeofDb51p2dfzSam4dCH8rml61wZKE'
                 }
             })
             console.log(response)
@@ -39,7 +39,7 @@ class CommentArea extends Component {
                 {this.state.isLoading && <Loading />}
                 {this.state.isError && <Error />}
                 <AddComment asin={this.props.asin} />
-                <CommentList commentsToShow={this.state.comments} />
+                <CommentWrapper commentsToShow={this.state.comments} />
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import { ListGroup } from 'react-bootstrap'
 import Comment from './Comment'
 
-const CommentList = ({ commentsToShow }) => (
+const CommentWrapper = ({ commentsToShow }) => (
     <ListGroup style={{ color: 'black' }}>
         {
             commentsToShow.map(comment => (
@@ -11,4 +11,4 @@ const CommentList = ({ commentsToShow }) => (
     </ListGroup>
 )
 
-export default CommentList
+export default CommentWrapper
