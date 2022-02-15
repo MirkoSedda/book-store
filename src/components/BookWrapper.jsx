@@ -16,7 +16,7 @@ const BookWrapper = ({ books }) => {
     <Container>
       <Row>
         <Col>
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="formBasicEmail" className="m-5">
             <Form.Label>Search</Form.Label>
             <Form.Control
               type="text"
@@ -27,18 +27,17 @@ const BookWrapper = ({ books }) => {
           </Form.Group>
         </Col>
       </Row>
-      <Row >
-        <Col xs={9}>
-
+      <Row>
+        <Col xs={10} className="d-flex flex-wrap">
           {
             books.filter(book => book.title.toLowerCase().includes(searchQuery)).map(book => (
-              <Col xs={12} key={book.asin} >
-                <Book book={book} changeState={changeState} />
-              </Col>
+              <div key={book.asin} >
+                <Book book={book} changeState={changeState}></Book>
+              </div>
             ))
           }
         </Col>
-        <Col xs={3}>
+        <Col xs={2}>
           <CommentArea asin={bookAsin} />
         </Col>
       </Row>
