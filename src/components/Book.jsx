@@ -16,7 +16,6 @@ const Book = ({ book, changeState }) => {
           <Card.Title style={{ color: 'black' }}>{book.title}</Card.Title>
         </Card.Body>
       </Card>
-      {console.log(book.title)}
     </>
   )
 }
