@@ -6,8 +6,6 @@ import Error from './Error'
 
 const CommentArea = ({ asin }) => {
 
-
-
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
