@@ -10,15 +10,16 @@ const AddComment = (asin) => {
     })
 
     useEffect(() => {
-        sendComment()
+        sendComment(comment)
+        // eslint-disable-next-line
     }, [comment])
 
-    const sendComment = async (e) => {
-        e.preventDefault()
+    const sendComment = async (event) => {
+        event.preventDefault()
         try {
             let response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
                 method: 'POST',
-                body: JSON.stringify(this.state.comment),
+                body: JSON.stringify(comment),
                 headers: {
                     'Content-type': 'application/json',
                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ4NDQ3NjcsImV4cCI6MTY0NjA1NDM2N30.CQYFhS63KiJkhKeofDb51p2dfzSam4dCH8rml61wZKE'
@@ -38,7 +39,7 @@ const AddComment = (asin) => {
 
     return (
         <div>
-            <Form onSubmit={this.sendComment}>
+            <Form onSubmit={sendComment}>
                 <Form.Group>
                     <Form.Label>Comment text</Form.Label>
                     <Form.Control
@@ -101,7 +102,7 @@ export default AddComment
 //                 }
 //             })
 //             if (response.ok) {
-//                 // the comment has been sent succesfully!!
+//                 the comment has been sent succesfully!!
 //                 alert('Comment was sent!')
 //             } else {
 //                 console.log('error')
