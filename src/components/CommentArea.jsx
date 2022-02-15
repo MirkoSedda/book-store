@@ -5,39 +5,43 @@ import Loading from './Loading'
 import Error from './Error'
 
 const CommentArea = ({ asin }) => {
-
     const [comments, setComments] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
-    const fetchBook = async (asin) => {
+    const fetchBook = async asin => {
         try {
-            let response = await fetch('https://striveschool-api.herokuapp.com/api/comments/' + asin, {
-                headers: {
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ4NDQ3NjcsImV4cCI6MTY0NjA1NDM2N30.CQYFhS63KiJkhKeofDb51p2dfzSam4dCH8rml61wZKE'
+            let response = await fetch(
+                'https://striveschool-api.herokuapp.com/api/comments/' + asin,
+                {
+                    headers: {
+                        Authorization:
+                            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ4NDQ3NjcsImV4cCI6MTY0NjA1NDM2N30.CQYFhS63KiJkhKeofDb51p2dfzSam4dCH8rml61wZKE',
+                    },
                 }
-            })
-            console.log(response)
+            )
             if (response.ok) {
                 let comments = await response.json()
-                console.log(asin);
+
                 setComments(comments)
                 setIsLoading(false)
                 setIsError(false)
             } else {
                 console.log('error')
+
                 setIsLoading(false)
                 setIsError(true)
             }
         } catch (error) {
             console.log(error)
+
             setIsLoading(false)
             setIsError(true)
         }
     }
 
-    useEffect((asin) => {
-        fetchBook()
+    useEffect(() => {
+        fetchBook(asin)
     }, [asin])
 
     return (

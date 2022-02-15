@@ -1,27 +1,28 @@
 import { useState } from "react";
 import { Button, Form } from 'react-bootstrap'
 
-const AddComment = (asin) => {
+const AddComment = ({ asin }) => {
 
     const [comment, setComment] = useState({
         comment: '',
         rate: 1,
-        elementId: asin,
     })
 
+
+
     const sendComment = async (event) => {
-        console.log(event);
         event.preventDefault()
         try {
             let response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
                 method: 'POST',
-                body: JSON.stringify(comment),
+                body: JSON.stringify({ ...comment, elementId: asin }),
                 headers: {
                     'Content-type': 'application/json',
                     Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhNjY0ZTgyZWExZDAwMTViYjAzZWMiLCJpYXQiOjE2NDQ4NDQ3NjcsImV4cCI6MTY0NjA1NDM2N30.CQYFhS63KiJkhKeofDb51p2dfzSam4dCH8rml61wZKE'
                 }
             })
             if (response.ok) {
+
                 alert('Comment was sent!')
             } else {
                 console.log('error')
@@ -31,7 +32,6 @@ const AddComment = (asin) => {
             console.log('error')
         }
     }
-
 
     return (
         <div>

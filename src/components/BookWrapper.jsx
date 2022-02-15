@@ -8,8 +8,10 @@ const BookWrapper = ({ books }) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [bookAsin, setBookAsin] = useState(undefined)
 
-  const changeState = (value) => setBookAsin(value)
 
+  const changeState = (value) => {
+    setBookAsin(value)
+  }
   return (
     <Container>
       <Row>
@@ -27,6 +29,7 @@ const BookWrapper = ({ books }) => {
       </Row>
       <Row >
         <Col xs={9}>
+
           {
             books.filter(book => book.title.toLowerCase().includes(searchQuery)).map(book => (
               <Col xs={12} key={book.asin} >
