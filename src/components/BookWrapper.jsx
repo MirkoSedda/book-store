@@ -46,7 +46,6 @@ const BookWrapper = ({ books }) => {
 
 export default BookWrapper
 
-
 // class BookWrapper extends Component {
 
 //   state = {
