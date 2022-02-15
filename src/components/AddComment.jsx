@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Form } from 'react-bootstrap'
 
 const AddComment = (asin) => {
@@ -9,12 +9,8 @@ const AddComment = (asin) => {
         elementId: asin,
     })
 
-    useEffect(() => {
-        sendComment(comment)
-        // eslint-disable-next-line
-    }, [comment])
-
     const sendComment = async (event) => {
+        console.log(event);
         event.preventDefault()
         try {
             let response = await fetch('https://striveschool-api.herokuapp.com/api/comments', {
@@ -39,7 +35,7 @@ const AddComment = (asin) => {
 
     return (
         <div>
-            <Form onSubmit={sendComment}>
+            <Form onSubmit={(event) => { sendComment(event) }}>
                 <Form.Group>
                     <Form.Label>Comment text</Form.Label>
                     <Form.Control
