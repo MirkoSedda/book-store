@@ -10,9 +10,9 @@ import NotFound from './components/NotFound'
 function App() {
   return (
     <div className="App bg-dark">
-      <MyNavbar />
-      <Welcome />
       <BrowserRouter>
+        <MyNavbar />
+        <Welcome />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/class" element={<ClassComponent />} />
