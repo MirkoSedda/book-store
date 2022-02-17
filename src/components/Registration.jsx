@@ -1,65 +1,121 @@
-// In Registration create a controlled form with the following fields:
-// Name - Required, at least 2 chars
-// Surname - Required, at least 3 chars
-// Email - Required - Should be an email field
-// Password - Required - Should contain at least 8 chars, 1 digit, 1 letter
-// PasswordConfirm - Required - Should have the same value as Password
-import { useState, useEffect } from 'react'
-import { Container, Form, Button } from 'react-bootstrap'
+import { useState } from "react"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 
-export default function Registration() {
+const Registration = () => {
 
-    const [name, setName] = useState(null)
-    const [surname, setSurname] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
-    const [confirmPassword, setConfirmPassword] = useState(null)
+    const [registration, setRegistration] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    })
 
-    const onSubmit = () => {
+    const [isValid, setIsValid] = useState(false)
 
-        const validName = () => name.length > 2
-        validName()
+    const handleInput = (key, value) => {
+        setRegistration({
+            ...registration,
+            [key]: value,
+        })
+    }
+
+    const validForm = () => {
+
+        registration.name.length >= 2 &&
+            registration.surname.length >= 3 &&
+            registration.password.length >= 8 &&
+            registration.password ===
+            registration.confirmPassword ?
+
+            setIsValid(true) : setIsValid(false)
 
     }
 
+    const handleRegistration = (e) => {
+        e.preventDefault()
+        setIsValid(true)
+    }
 
 
     return (
+        <div className="d-flex flex-column align-items-center">
+            {isValid ? (
+                <>
+                    <h1>Thanks for joining us!</h1>
+                    <h3>Your user info's are:</h3>
+                    <p>{registration.name}</p>
+                    <p>{registration.surname}</p>
+                    <p>{registration.email}</p>
+                </>
+            ) : (
+                <>
+                    <h1>Please register</h1>
+                    <Form onSubmit={handleRegistration}>
+                        <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                placeholder="name"
+                                onChange={(e) => handleInput("name", e.target.value)}
+                                value={registration.name}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Surname</Form.Label>
+                            <Form.Control
+                                type="text"
+                                required
+                                placeholder="surname"
+                                onChange={(e) => handleInput("surname", e.target.value)}
+                                value={registration.surname}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                required
+                                placeholder="email"
+                                onChange={(e) => handleInput("email", e.target.value)}
+                                value={registration.email}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                required
+                                placeholder="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 
-        <Container className="w-50">
+                                onChange={(e) => handleInput("password", e.target.value)}
+                                value={registration.password}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Confirm password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                required
+                                placeholder="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
 
-            <Form onSubmit>
-                <Form.Group className="mb-3" controlId="formBasicName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter name" required value={name} onChange={(e) => setName(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicSurname">
-                    <Form.Label>Surname</Form.Label>
-                    <Form.Control type="text" placeholder="Enter surname" required value={surname} onChange={(e) => setSurname(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" required value={email} onChange={(e) => setEmail(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <Form.Control type="password" placeholder="Confirm Password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-
-        </Container>
-
+                                onChange={(e) =>
+                                    handleInput("confirmPassword", e.target.value)
+                                }
+                                value={registration.confirmPassword}
+                            />
+                        </Form.Group>
+                        <Button type="submit" disabled={!isValid} className='mt-3'>
+                            Register
+                        </Button>
+                    </Form>
+                </>
+            )}
+        </div>
     )
 }
+
+
+export default Registration
